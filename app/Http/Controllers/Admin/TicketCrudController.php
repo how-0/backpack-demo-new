@@ -107,7 +107,7 @@ class TicketCrudController extends CrudController
         CRUD::filter('Creator')
         ->type('text')
         ->whenActive(function($value) {
-        CRUD::addClause('where', 'id', 'LIKE', "%$value%");
+        CRUD::addClause('where', 'created_by', 'LIKE', "%$value%");
         });
                     
     }
@@ -134,12 +134,6 @@ class TicketCrudController extends CrudController
             'label' => "Name",
             'name' => 'name',
             'type' => 'text',
-            'validationRules' => 'required|min:3|max:255',
-            'validationMessages' => [
-                'required' => 'The name field is required',
-                'min' => 'The name must be at least 3 characters long',
-                'max' => 'The name may not be greater than 255 characters'
-            ],
         ]);
         CRUD::field([
             'label'       => 'Gender',
@@ -149,10 +143,6 @@ class TicketCrudController extends CrudController
                 "Male" => "Male",
                 "Female" => "Female"
             ],
-            'validationRules' => 'required',
-            'validationMessages' => [
-                'required' => 'You must select a gender.'
-            ],
             'inline' => false,
         ]);
 
@@ -160,11 +150,6 @@ class TicketCrudController extends CrudController
             'label' => 'Inquiry', 
             'name'  => 'inquiry',
             'type'  => 'textarea',
-            'validationRules' => 'required|min:10',
-            'validationMessages' => [
-                'required' => 'The inquiry field is required',
-                'min' => 'The inquiry must be at least 10 characters long'
-            ],
         ]);
 
         CRUD::field([
@@ -174,10 +159,6 @@ class TicketCrudController extends CrudController
             'options'     => ['New' => 'New', 'Processing' => 'Processing', 'Cancel' => 'Cancel', 'Completed' => 'Completed'],
             'allows_null' => false,
             'default'     => 'New',
-            'validationRules' => 'required',
-            'validationMessages' => [ 
-                'required' => 'You must select a status.'
-            ],
             
             // 'allows_multiple' => true
         ]);
@@ -195,7 +176,7 @@ class TicketCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
-        $this->setupCreateOperation();
+        CRUD::setValidation(TicketRequest::class);
     }
     
 }

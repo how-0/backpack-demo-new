@@ -25,7 +25,10 @@ class TicketRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name'    => 'required|min:3|max:255',
+            'gender'  => 'required|in:Male,Female',
+            'inquiry' => 'required|min:10',
+            'status'  => 'required|in:New,Processing,Completed,Cancel',
         ];
     }
 
@@ -49,7 +52,10 @@ class TicketRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'name.required'    => 'Name is required.',
+            'gender.required'  => 'Please select gender.',
+            'inquiry.required' => 'Inquiry cannot be empty.',
+            'status.required'  => 'Status is required.',
         ];
     }
 }
