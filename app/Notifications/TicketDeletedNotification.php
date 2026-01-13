@@ -40,10 +40,9 @@ class TicketDeletedNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->subject('Notification: Ticket Removed #' . $this->ticketData['id'])
-                    ->greeting('Hello.')
-                    ->line('The ticket regarding "' . $this->ticketData['inquiry'] . '" has been deleted from our system.');
-
+            ->subject('Notification: Ticket Removed #' . $this->ticketData['id'])
+            ->greeting('Hello.')
+            ->line('The ticket regarding "' . $this->ticketData['inquiry'] . '" has been deleted from our system.');
     }
 
     /**

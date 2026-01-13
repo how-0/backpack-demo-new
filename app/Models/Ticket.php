@@ -22,18 +22,19 @@ class Ticket extends Model
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
-    protected static function booted(){
-        static::saved(function ($ticket){ 
+    protected static function booted()
+    {
+        static::saved(function ($ticket) {
             $creator = $ticket->creator;
-            if ($ticket -> wasRecentlyCreated){
+            if ($ticket->wasRecentlyCreated) {
                 Notification::send($creator, new TicketNotification($ticket));
                 return;
-            }else if ($ticket -> wasChanged(['name', 'gender', 'inquiry', 'status'])){
+            } else if ($ticket->wasChanged(['status'])) {
                 Notification::send($creator, new TicketUpdatedNotification($ticket));
             }
         });
-            
-        static::deleting(function ($ticket){
+
+        static::deleting(function ($ticket) {
             $creator = $ticket->creator;
             $ticketData = $ticket->toArray();
             Notification::send($creator, new TicketDeletedNotification($ticketData));

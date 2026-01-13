@@ -24,7 +24,7 @@ class TicketCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
-  
+
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
      * 
@@ -78,48 +78,47 @@ class TicketCrudController extends CrudController
         CRUD::addButtonFromView('line', 'send_mail', 'send_mail', 'end');
 
         CRUD::filter('Name')
-        ->type('text')
-        ->whenActive(function($value) {
-        CRUD::addClause('where', 'name', 'LIKE', "%$value%");
-        });
+            ->type('text')
+            ->whenActive(function ($value) {
+                CRUD::addClause('where', 'name', 'LIKE', "%$value%");
+            });
 
         CRUD::filter('gender')
-        ->type('dropdown')
-        ->values([
-        'Male' => 'Male',
-        'Female' => 'Female',
-        ])
-        ->whenActive(function($value) {
-        CRUD::addClause('where', 'gender', $value);
-        });
+            ->type('dropdown')
+            ->values([
+                'Male' => 'Male',
+                'Female' => 'Female',
+            ])
+            ->whenActive(function ($value) {
+                CRUD::addClause('where', 'gender', $value);
+            });
 
         CRUD::filter('Inquiry')
-        ->type('text')
-        ->whenActive(function($value) {
-        CRUD::addClause('where', 'inquiry', 'LIKE', "%$value%");
-        });
+            ->type('text')
+            ->whenActive(function ($value) {
+                CRUD::addClause('where', 'inquiry', 'LIKE', "%$value%");
+            });
 
         CRUD::filter('status')
-        ->type('dropdown')
-        ->values([
-        'New' => 'New',
-        'Processing' => 'Processing',
-        'Completed' => 'Completed',
-        'Cancel' => 'Cancel',
-        ])
-        ->whenActive(function($value) {
-        CRUD::addClause('where', 'status', $value);
-        });
+            ->type('dropdown')
+            ->values([
+                'New' => 'New',
+                'Processing' => 'Processing',
+                'Completed' => 'Completed',
+                'Cancel' => 'Cancel',
+            ])
+            ->whenActive(function ($value) {
+                CRUD::addClause('where', 'status', $value);
+            });
 
         CRUD::filter('Creator')
-        ->type('text')
-        ->whenActive(function($value) {
-        CRUD::addClause('where', 'created_by', 'LIKE', "%$value%");
-        });
-                    
+            ->type('text')
+            ->whenActive(function ($value) {
+                CRUD::addClause('where', 'created_by', 'LIKE', "%$value%");
+            });
     }
 
-    
+
     /**
      * Define what happens when the Create operation is loaded.
      * 
@@ -144,7 +143,7 @@ class TicketCrudController extends CrudController
         ]);
         CRUD::field([
             'label'       => 'Gender',
-            'name'        => 'gender', 
+            'name'        => 'gender',
             'type'        => 'radio',
             'options'     => [
                 "Male" => "Male",
@@ -154,19 +153,19 @@ class TicketCrudController extends CrudController
         ]);
 
         CRUD::field([
-            'label' => 'Inquiry', 
+            'label' => 'Inquiry',
             'name'  => 'inquiry',
             'type'  => 'textarea',
         ]);
 
         CRUD::field([
-            'label'       => "Status",    
+            'label'       => "Status",
             'name'        => 'status',
             'type'        => 'select_from_array',
             'options'     => ['New' => 'New', 'Processing' => 'Processing', 'Cancel' => 'Cancel', 'Completed' => 'Completed'],
             'allows_null' => false,
             'default'     => 'New',
-            
+
             // 'allows_multiple' => true
         ]);
         /**
@@ -185,5 +184,4 @@ class TicketCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
-    
 }

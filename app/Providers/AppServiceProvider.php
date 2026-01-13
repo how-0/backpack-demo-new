@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     protected $listen = [
-        Login::class=>[
+        Login::class => [
             SendLoginNotification::class,
         ],
     ];

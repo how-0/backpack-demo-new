@@ -13,7 +13,7 @@ class SendTicketMailCrudController extends CrudController
     public function sendMailToCreator($id)
     {
         $entry = Ticket::findOrFail($id);
-        
+
         $creator = $entry->creator;
 
         Notification::send($creator, new TicketNotification($entry));

@@ -46,7 +46,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function allUsers(){
+    public function allUsers()
+    {
         return self::orderBy('name')->pluck('name', 'id')->toArray();
     }
 }
