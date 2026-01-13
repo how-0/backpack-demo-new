@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 
+use id;
+use App\Models\Ticket;
 use App\Http\Requests\TicketRequest;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
+use App\Notifications\TicketNotification;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -19,7 +24,7 @@ class TicketCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
-
+  
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
      * 
@@ -69,6 +74,8 @@ class TicketCrudController extends CrudController
             'name' => 'creator.name',
             'type' => 'text',
         ]);
+
+        CRUD::addButtonFromView('line', 'send_mail', 'send_mail', 'end');
 
         CRUD::filter('Name')
         ->type('text')
@@ -176,7 +183,7 @@ class TicketCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
-        CRUD::setValidation(TicketRequest::class);
+        $this->setupCreateOperation();
     }
     
 }

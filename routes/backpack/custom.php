@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\TicketCrudController;
 
 // --------------------------
 // Custom Backpack Routes
@@ -17,4 +18,5 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
     Route::crud('ticket', 'TicketCrudController');
+    Route::get('article/{id}/send-mail', 'SendTicketMailCrudController@sendMailToCreator')->name('article.send_mail');
 }); // this should be the absolute last line of this file

@@ -3,9 +3,12 @@
 namespace App\Providers;
 
 // use Illuminate\Auth\Events\Login;
+use App\Models\Ticket;
+use App\Observers\TicketObserver;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\ServiceProvider;
 use App\Listeners\SendLoginNotification;
+
 // use App\Listeners\SendLoginNotification;
 
 class AppServiceProvider extends ServiceProvider
